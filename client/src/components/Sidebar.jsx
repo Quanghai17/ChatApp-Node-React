@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { FaUserPlus } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from '../redux/userSlice';
+import EditUserDetails from './EditUserDetails';
 
 const Sidebar = () => {
     const user = useSelector(state => state?.user);
     const dispatch = useDispatch()
     const [editUserOpen,setEditUserOpen] = useState(false)
+    const navigate = useNavigate()
 
     const handleLogout = ()=>{
         dispatch(logout())
@@ -52,6 +55,12 @@ const Sidebar = () => {
 
                 </div>
             </div>
+
+            {
+                editUserOpen && (
+                    <EditUserDetails onClose={()=>setEditUserOpen(false)} user={user}/>
+                )
+            }
         </div>
     )
 }
