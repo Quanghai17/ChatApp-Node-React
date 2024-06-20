@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { logout, setUser } from "../redux/userSlice"
+import Sidebar from "../components/Sidebar"
 
 
 
@@ -11,7 +12,6 @@ const Home = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    console.log( "user redux", user )
     const fetchUserDetails = async () => {
         try {
             const URL = `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/user-details`
@@ -29,7 +29,7 @@ const Home = () => {
                 navigate("/email")
             }
 
-            console.log("User details: ", response)
+            // console.log("User details: ", response)
         } catch (error) {
             console.log("error", error)
         }
@@ -39,8 +39,12 @@ const Home = () => {
         fetchUserDetails()
     }, [])
 
+    // const basePath = location.pathname === '/'
     return (
-        <div>Home
+        <div className='grid lg:grid-cols-[300px,1fr] h-screen max-h-screen'>
+            <section className="bg-white lg:block">
+                <Sidebar />
+            </section>
 
             <section>
                 <Outlet />
