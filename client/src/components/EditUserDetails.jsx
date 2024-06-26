@@ -69,7 +69,6 @@ const EditUserDetails = ({onClose,user}) => {
                 withCredentials : true
             })
 
-            console.log('response',response)
             taost.success(response?.data?.message)
             
             if(response.data.success){
